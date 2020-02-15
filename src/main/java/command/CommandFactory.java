@@ -15,6 +15,7 @@ public class CommandFactory {
             case "add": return createAddCarCommand(tokenizedInput);
             case "list": return Optional.of(new ListCarsCommand(carRepository));
             case "remove": return createRemoveCarCommand(tokenizedInput);
+            case "load": return Optional.of(new LoadFromFileCommand(tokenizedInput.nextToken(), carRepository));
             case "exit": return Optional.of(() -> System.exit(0));
             default: return Optional.empty();
         }
@@ -42,7 +43,22 @@ public class CommandFactory {
             return Optional.empty();
         }
         int idToDelete = Integer.parseInt(tokenizedInput.nextToken());
+
+
+//        return Optional.of(new RemoveCarCommand(carRepository, idToDelete));
+
+
         return Optional.of(() -> carRepository.removeById(idToDelete));
     }
+
+//    @RequiredArgsConstructor
+//    private static class RemoveCarCommand implements UserCommand {
+//        private final CarRepository carRepository;
+//        private final int id;
+//        @Override
+//        public void execute() {
+//            carRepository.removeById(id);
+//        }
+//    }
 
 }

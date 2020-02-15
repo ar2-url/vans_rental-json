@@ -1,7 +1,7 @@
 package command;
 
 public class CommandExecutor {
-    public void execute(UserCommand userCommand) {
+    public void runUserCommand(UserCommand userCommand) {
         userCommand.execute();
     }
 }

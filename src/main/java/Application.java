@@ -1,7 +1,9 @@
 import car.CarRepository;
 import command.CommandExecutor;
 import command.CommandFactory;
+import command.UserCommand;
 
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -12,9 +14,13 @@ public class Application {
 
     void executeCommand() {
         displayPrompt();
-        commandFactory.commandFrom(tokenizedInput())
+        Optional<UserCommand> optionalCommand = commandFactory.commandFrom(tokenizedInput());
+
+//        optionalCommand.ifPresent(UserCommand::execute);
+
+        optionalCommand
                 .ifPresentOrElse(
-                        commandExecutor::execute,
+                        userCommand -> commandExecutor.runUserCommand(userCommand),
                         () -> System.out.println("Command not recognized")
                 );
     }

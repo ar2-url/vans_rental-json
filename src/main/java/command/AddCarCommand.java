@@ -13,6 +13,12 @@ class AddCarCommand implements UserCommand {
 
     @Override
     public void execute() {
+//        if(carRepository.findAll().stream()
+//                .map(Car::getVin)
+//                .anyMatch(vin::equals)) {
+//            System.out.println("Car with given VIN already exists");
+//        }
+
         try {
             Car addedCar = carRepository.add(new Car(model, vin));
             System.out.println("Car with id " + addedCar.getId() + " added");
